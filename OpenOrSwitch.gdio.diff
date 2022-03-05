@@ -1,5 +1,5 @@
 diff --git a/autoload/fetch.vim b/autoload/fetch.vim
-index 6ab65b3..cddfb3a 100644
+index 6ab65b3..78b8032 100644
 --- ./autoload/fetch.vim
 +++ ./autoload/fetch.vim
 @@ -181,8 +181,8 @@ if has('file_in_path') " {{{
@@ -13,7 +13,7 @@ index 6ab65b3..cddfb3a 100644
  
      if !empty(l:cfile)
        " locate '<cfile>' in current line
-@@ -200,14 +200,12 @@ if has('file_in_path') " {{{
+@@ -200,14 +200,13 @@ if has('file_in_path') " {{{
          if match(l:line, l:spec.pattern, l:offset) is l:offset
            let l:match = matchstr(l:line, l:spec.pattern, l:offset)
            " leverage Vim's own |gf| for opening the file
@@ -26,6 +26,7 @@ index 6ab65b3..cddfb3a 100644
  
 -    " fall back to Vim's |gF|
 -    execute 'normal!' a:count.'gF'
++    silent exec a:mode . ' ' . l:cfile
      return 1
    endfunction " }}}
  
