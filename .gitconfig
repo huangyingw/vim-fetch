@@ -1,0 +1,11 @@
+[remote "origin"]
+	url = git@github.com:huangyingw/vim-fetch.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "wsdjeg"]
+	url = git@github.com:wsdjeg/vim-fetch.git
+	fetch = +refs/heads/*:refs/remotes/wsdjeg/*
+[gsync]
+    remote = wsdjeg
+    target = wsdjeg/master
+[push]
+    remote = origin
