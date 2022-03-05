@@ -1,0 +1,31 @@
+diff --git a/autoload/fetch.vim b/autoload/fetch.vim
+index 6ab65b3..cddfb3a 100644
+--- ./autoload/fetch.vim
++++ ./autoload/fetch.vim
+@@ -181,8 +181,8 @@ if has('file_in_path') " {{{
+   " @returns:    Boolean
+   " @notes:      - will test all available specs for a match
+   "              - will fall back on Vim's |gF| when no spec matches
+-  function! fetch#cfile(count) abort " {{{
+-    let l:cfile = expand('<cfile>')
++  function! fetch#cfile(cfile, mode) abort " {{{
++    let l:cfile = a:cfile
+ 
+     if !empty(l:cfile)
+       " locate '<cfile>' in current line
+@@ -200,14 +200,12 @@ if has('file_in_path') " {{{
+         if match(l:line, l:spec.pattern, l:offset) is l:offset
+           let l:match = matchstr(l:line, l:spec.pattern, l:offset)
+           " leverage Vim's own |gf| for opening the file
+-          execute 'normal!' a:count.'gf'
++          silent exec a:mode . ' ' . l:cfile
+           return s:setpos(l:spec.parse(l:cfile.l:match)[1])
+         endif
+       endfor
+     endif
+ 
+-    " fall back to Vim's |gF|
+-    execute 'normal!' a:count.'gF'
+     return 1
+   endfunction " }}}
+ 
