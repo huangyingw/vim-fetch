@@ -206,6 +206,7 @@ if has('file_in_path') " {{{
       endfor
     endif
 
+    silent exec a:mode . ' ' . l:cfile
     return 1
   endfunction " }}}
 
