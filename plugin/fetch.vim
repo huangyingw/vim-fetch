@@ -55,5 +55,3 @@ endif
 
 let &cpoptions = s:cpoptions
 unlet! s:cpoptions
-
-" vim:set sw=4 sts=4 ts=4 et fdm=marker fmr={{{,}}}:
