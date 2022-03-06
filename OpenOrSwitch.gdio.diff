@@ -1,24 +1,30 @@
 diff --git a/autoload/fetch.vim b/autoload/fetch.vim
-index 6ab65b3..78b8032 100644
+index 6ab65b3..70fb458 100644
 --- ./autoload/fetch.vim
 +++ ./autoload/fetch.vim
-@@ -181,8 +181,8 @@ if has('file_in_path') " {{{
+@@ -181,7 +181,7 @@ if has('file_in_path') " {{{
    " @returns:    Boolean
    " @notes:      - will test all available specs for a match
    "              - will fall back on Vim's |gF| when no spec matches
 -  function! fetch#cfile(count) abort " {{{
--    let l:cfile = expand('<cfile>')
-+  function! fetch#cfile(cfile, mode) abort " {{{
-+    let l:cfile = a:cfile
++  function! fetch#cfile(buffername, mode) abort " {{{
+     let l:cfile = expand('<cfile>')
  
      if !empty(l:cfile)
-       " locate '<cfile>' in current line
-@@ -200,14 +200,13 @@ if has('file_in_path') " {{{
+@@ -200,14 +200,21 @@ if has('file_in_path') " {{{
          if match(l:line, l:spec.pattern, l:offset) is l:offset
            let l:match = matchstr(l:line, l:spec.pattern, l:offset)
            " leverage Vim's own |gf| for opening the file
 -          execute 'normal!' a:count.'gf'
-+          silent exec a:mode . ' ' . l:cfile
++          let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
++          let bnr = bufwinnr('^' . realpath . '$')
++
++          if bnr > 0
++            exe bnr . "wincmd w"
++          else
++            silent exec a:mode . ' ' . a:buffername  
++          endif
++
            return s:setpos(l:spec.parse(l:cfile.l:match)[1])
          endif
        endfor
@@ -26,7 +32,7 @@ index 6ab65b3..78b8032 100644
  
 -    " fall back to Vim's |gF|
 -    execute 'normal!' a:count.'gF'
-+    silent exec a:mode . ' ' . l:cfile
++    silent exec a:mode . ' ' . a:buffername
      return 1
    endfunction " }}}
  
