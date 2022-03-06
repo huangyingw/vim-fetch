@@ -181,8 +181,8 @@ if has('file_in_path') " {{{
   " @returns:    Boolean
   " @notes:      - will test all available specs for a match
   "              - will fall back on Vim's |gF| when no spec matches
-  function! fetch#cfile(cfile, mode) abort " {{{
-    let l:cfile = a:cfile
+  function! fetch#cfile(buffername, mode) abort " {{{
+    let l:cfile = expand('<cfile>')
 
     if !empty(l:cfile)
       " locate '<cfile>' in current line
@@ -200,13 +200,21 @@ if has('file_in_path') " {{{
         if match(l:line, l:spec.pattern, l:offset) is l:offset
           let l:match = matchstr(l:line, l:spec.pattern, l:offset)
           " leverage Vim's own |gf| for opening the file
-          silent exec a:mode . ' ' . l:cfile
+          let realpath = substitute(system("realpath " . '"' . a:buffername . '"'), '\n', '', '')
+          let bnr = bufwinnr('^' . realpath . '$')
+
+          if bnr > 0
+            exe bnr . "wincmd w"
+          else
+            silent exec a:mode . ' ' . a:buffername  
+          endif
+
           return s:setpos(l:spec.parse(l:cfile.l:match)[1])
         endif
       endfor
     endif
 
-    silent exec a:mode . ' ' . l:cfile
+    silent exec a:mode . ' ' . a:buffername
     return 1
   endfunction " }}}
 
