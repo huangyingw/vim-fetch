@@ -1,5 +1,4 @@
 diff --git a/autoload/fetch.vim b/autoload/fetch.vim
-index 6ab65b3..0ddcf0e 100644
 --- ./autoload/fetch.vim
 +++ ./autoload/fetch.vim
 @@ -181,7 +181,9 @@ if has('file_in_path') " {{{
@@ -48,7 +47,6 @@ index 6ab65b3..0ddcf0e 100644
 -
 -" vim:set sw=2 sts=2 ts=2 et fdm=marker fmr={{{,}}}:
 diff --git a/plugin/fetch.vim b/plugin/fetch.vim
-index 651b516..5f71214 100644
 --- ./plugin/fetch.vim
 +++ ./plugin/fetch.vim
 @@ -55,5 +55,3 @@ endif
