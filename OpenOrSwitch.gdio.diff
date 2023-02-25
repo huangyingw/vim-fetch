@@ -1,3 +1,19 @@
+diff --git a/.gitconfig b/.gitconfig
+new file mode 100644
+--- /dev/null
++++ ./.gitconfig
+@@ -0,0 +1,11 @@
++[remote "origin"]
++	url = git@github.com:huangyingw/vim-fetch.git
++    fetch = +refs/heads/*:refs/remotes/origin/*
++[remote "wsdjeg"]
++	url = git@github.com:wsdjeg/vim-fetch.git
++	fetch = +refs/heads/*:refs/remotes/wsdjeg/*
++[gsync]
++    remote = wsdjeg
++    target = wsdjeg/master
++[push]
++    remote = origin
 diff --git a/autoload/fetch.vim b/autoload/fetch.vim
 --- ./autoload/fetch.vim
 +++ ./autoload/fetch.vim
