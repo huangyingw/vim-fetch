@@ -17,7 +17,7 @@ new file mode 100644
 diff --git a/autoload/fetch.vim b/autoload/fetch.vim
 --- ./autoload/fetch.vim
 +++ ./autoload/fetch.vim
-@@ -181,7 +181,9 @@ if has('file_in_path') " {{{
+@@ -197,7 +197,9 @@ if has('file_in_path') " {{{
      " @returns:    Boolean
      " @notes:      - will test all available specs for a match
      "              - will fall back on Vim's |gF| when no spec matches
@@ -28,7 +28,7 @@ diff --git a/autoload/fetch.vim b/autoload/fetch.vim
          let l:cfile = expand('<cfile>')
  
          if !empty(l:cfile)
-@@ -200,14 +202,24 @@ if has('file_in_path') " {{{
+@@ -216,14 +218,24 @@ if has('file_in_path') " {{{
                  if match(l:line, l:spec.pattern, l:offset) is l:offset
                      let l:match = matchstr(l:line, l:spec.pattern, l:offset)
                      " leverage Vim's own |gf| for opening the file
@@ -56,7 +56,7 @@ diff --git a/autoload/fetch.vim b/autoload/fetch.vim
          return 1
      endfunction " }}}
  
-@@ -296,5 +308,3 @@ endif
+@@ -313,5 +325,3 @@ endif
  
  let &cpoptions = s:cpoptions
  unlet! s:cpoptions
